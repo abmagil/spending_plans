@@ -1,6 +1,7 @@
 import goals from '../../goals'
 
 import React from 'react'
+import { StyleSheet, css } from 'aphrodite/no-important';
 import FrpGoalRow from './FrpGoalRow'
 
 const {
@@ -18,7 +19,7 @@ class FrpTable extends Component {
   render() {
     const { goals } = this.state;
 
-    return <table>
+    return <table className={css(styles.table)}>
       <thead>
         <tr>
          <th>Goal</th>
@@ -34,5 +35,13 @@ class FrpTable extends Component {
     </table>
   }
 }
+
+const styles = StyleSheet.create({
+  table: {
+    border: '1px solid black',
+    width: '80%',
+    margin: '15px auto'
+  }
+})
 
 export default FrpTable;
