@@ -1,19 +1,11 @@
 import React from 'react'
+import FrpGoalAttribute from './FrpGoalAttribute'
 
 const {
   Component
 } = React;
 
-const GoalAttribute = ({ goal, attribute }) => (
-  <td>
-    {false
-      ? <p>{goal[attribute]}</p>
-      : <input value={goal[attribute]} />
-    }
-  </td>
-)
-
-class FrpGoalRow extends React.Component {
+class FrpGoalRow extends Component {
   constructor(props) {
     super(props);
     this.state = {
