@@ -1,35 +1,48 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 const {
   Component
 } = React;
 
-class FrpGoalAttribute extends Component {
-  constructor(props) {
-    super(props);
-    const { lockedAttr, attrName } = props;
-    this.state = {
-      isLocked: lockedAttr === attrName
+const FrpGoalAttribute = ({ attrName, lockedAttr, value, onGoalAttrChange }) => (
+  <td>
+    {lockedAttr === attrName
+      ? <p>{value}</p>
+      : <input type="number" value={value} onChange={() => onGoalAttrChange({attrName, value})} />
     }
-  }
+  </td>
+)
 
-  updateVal = () => {
-    const { attrName } = this.props;
-    const newVal = this.inputVal.value;
-    this.props.onChange({ attrName, newVal })
-  }
-
-  render() {
-    const { goal, attrName, onChange } = this.props;
-    const { isLocked } = this.state;
-
-    return <td>
-      {isLocked
-        ? <p>{goal[attrName]}</p>
-        : <input type="number" value={goal[attrName]} onChange={this.updateVal} ref={c => this.inputVal = c} />
-      }
-    </td>
-  }
+FrpGoalAttribute.propTypes = {
+  onGoalAttrChange: PropTypes.func.isRequired,
+  attrName: PropTypes.string.isRequired,
+  lockedAttr: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired
 }
 
-export default FrpGoalAttribute;
+export default FrpGoalAttribute
+
+// class FrpGoalAttribute extends Component {
+//   constructor(props) {
+//     super(props);
+//   }
+
+//   updateVal = () => {
+//     const { attrName, handleChange } = this.props;
+//     const newVal = this.inputVal.value;
+//     handleChange({ attrName, newVal });
+//   }
+
+//   render() {
+//     const { value, attrName, lockedAttr } = this.props;
+
+//     return <td>
+//       {lockedAttr === attrName
+//         ? <p>{value}</p>
+//         : <input type="number" value={value} onChange={this.updateVal} ref={c => this.inputVal = c} />
+//       }
+//     </td>
+//   }
+// }
+
+// export default FrpGoalAttribute;

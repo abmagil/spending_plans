@@ -1,5 +1,8 @@
 import React from 'react'
-import FrpGoalAttribute from './FrpGoalAttribute'
+
+import FrpGoalAttribute from './FrpGoalAttribute';
+import { moveUp, moveDown } from '../actions/goals';
+import { updateGoal } from '../actions/goal';
 
 const {
   Component
@@ -9,25 +12,41 @@ class FrpGoalRow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      locked: "deadline"
+      lockedAttr: "deadline"
     }
   }
 
   render() {
     const { goal } = this.props;
+    const { lockedAttr } = this.state;
 
-    return<tr>
+    return <tr>
       <td>
         {goal.type}
       </td>
-      <GoalAttribute goal={goal} attribute="total" />
-      <GoalAttribute goal={goal} attribute="deadline" />
-      <GoalAttribute goal={goal} attribute="outlay" />
+      <FrpGoalAttribute
+        value={goal.total}
+        attrName="total"
+        lockedAttr={lockedAttr}
+        onGoalAttrChange={updateGoal}
+      />
+      <FrpGoalAttribute
+        value={goal.deadline}
+        attrName="deadline"
+        lockedAttr={lockedAttr}
+        onGoalAttrChange={updateGoal}
+      />
+      <FrpGoalAttribute
+        value={goal.outlay}
+        attrName="outlay"
+        lockedAttr={lockedAttr}
+        onGoalAttrChange={updateGoal}
+      />
       <td>
-        <button>
+        <button onChange={moveUp}>
           Up
         </button>
-        <button>
+        <button onChange={moveDown}>
           Down
         </button>
       </td>
