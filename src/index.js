@@ -5,8 +5,9 @@ import { createStore, combineReducers } from 'redux';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
 
-import goals from './reducers/goals';
 import availableCash from './reducers/available-cash';
+import goals from './reducers/goals';
+import order from './reducers/order';
 
 // REMOVE THIS BLOCK ONCE ACTIONS ARE WIRED CORRECTLY
 import defaultGoals from '../goals'
@@ -19,6 +20,7 @@ import App from './containers/App'
 
 const reducer = combineReducers({
   goals,
+  order,
   availableCash
 })
 
@@ -31,5 +33,7 @@ render(
   document.querySelector('#app')
 )
 
-defaultGoals.map((goal) => store.dispatch(addGoal(goal)));
-// store.dispatch(availableCash(400));
+defaultGoals.map((goal) => {
+  store.dispatch(addGoal(goal))
+})
+// store.dispatch(setAvailableCash(400));

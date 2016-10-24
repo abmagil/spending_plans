@@ -9,23 +9,27 @@ import { moveUp, moveDown } from '../actions/goals';
 const {
   arrayOf,
   number,
+  objectOf,
   shape,
   string
  } = PropTypes;
 
-const GoalsContainer = ({ goals, onUpClick, onDownClick }) => (
+const GoalsContainer = ({ goals, order, onUpClick, onDownClick }) => (
   <FrpTable>
-    {goals.map((goal) => (<FrpGoalRow
-      goal={goal}
-      key={goal.id} 
-      onUpClick={() => onUpClick(goal.id)}
-      onDownClick={() => onDownClick(goal.id)} />)
+    {order.map((goalId) => (
+      <FrpGoalRow
+        goal={goals[goalId]}
+        key={goalId}
+        onUpClick={() => onUpClick(goalId)}
+        onDownClick={() => onDownClick(goalId)} />
+      )
     )}
   </FrpTable>
 )
 
 GoalsContainer.propTypes = {
-  goals: arrayOf(shape({
+  order: arrayOf(number).isRequired,
+  goals: objectOf(shape({
     id: number.isRequired,
     total: number.isRequired,
     deadline: number.isRequired,
@@ -33,7 +37,10 @@ GoalsContainer.propTypes = {
   })).isRequired
 };
 
-const mapStateToProps = (state) => ({goals: state.goals})
+const mapStateToProps = (state) => ({
+  goals: state.goals,
+  order: state.order
+})
 const mapDispatchToProps = (dispatch) => {
   return {
     onUpClick: (id) => {
