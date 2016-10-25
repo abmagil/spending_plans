@@ -20,7 +20,9 @@
     "redux": "^3.6.0"
   },
   "devDependencies": {
-    "nwb": "0.12.x"
+    "enzyme": "^2.5.1",
+    "nwb": "0.12.x",
+    "react-addons-test-utils": "^15.3.2"
   },
   "author": "",
   "license": "MIT",
