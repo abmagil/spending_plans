@@ -8,6 +8,7 @@ import { moveUp, moveDown } from '../actions/goals';
 
 const {
   arrayOf,
+  func,
   number,
   objectOf,
   shape,
@@ -34,7 +35,9 @@ GoalsContainer.propTypes = {
     total: number.isRequired,
     deadline: number.isRequired,
     outlay: number.isRequired
-  })).isRequired
+  })).isRequired,
+  onUpClick: func.isRequired,
+  onDownClick: func.isRequired
 };
 
 const mapStateToProps = (state) => ({
