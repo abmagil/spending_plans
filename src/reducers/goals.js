@@ -1,30 +1,26 @@
 import { ADD_GOAL, UPDATE_GOAL } from '../constants/ActionTypes';
 
+export function goal(state, action) {
+  const { attrName, newVal, key } = action;
+  if (key !== state.key) { return item }
+
+  return {
+    ...state,
+    [attrName]: newVal
+  }
+}
+
 export default function goals(state = {}, action) {
-  // const { goalIndex } = action;
-  const goalIndex = 1;
-  const goalsCopy = goals;
-  
   switch (action.type) {
     case ADD_GOAL:
       const { goal } = action;
-      let newState = {
+      
+      return {
         ...state,
         [goal.id]: goal
       }
-      return newState
     case UPDATE_GOAL:
-      const { attrName, key, newVal } = action;
-      return state.map((goal) => {
-        if(key !== goal.key) {
-          return item;
-        }
-
-        return {
-          ...goal,
-          [attrName]: newVal
-        }
-      })
+      return state.map((g) => (goal(g, action)));
     default:
       return state;
   }
