@@ -5,33 +5,31 @@ import FrpTable from '../components/FrpTable';
 import FrpGoalRow from '../components/FrpGoalRow';
 
 import { moveUp, moveDown } from '../actions/goals';
-import { goalsAndOrderFrom } from '../reducers/goals';
+import { orderedGoalsFrom } from '../reducers/goals';
 
 const {
   arrayOf,
   func,
   number,
-  objectOf,
   shape,
   string
  } = PropTypes;
 
-const GoalsContainer = ({ goals, order, onUpClick, onDownClick }) => (
+const GoalsContainer = ({ orderedGoals, onUpClick, onDownClick }) => (
   <FrpTable>
-    {order.map((goalId) => (
+    {orderedGoals.map((goal) => (
       <FrpGoalRow
-        goal={goals[goalId]}
-        key={goalId}
-        onUpClick={() => onUpClick(goalId)}
-        onDownClick={() => onDownClick(goalId)} />
+        goal={goal}
+        key={goal.id}
+        onUpClick={() => onUpClick(goal.id)}
+        onDownClick={() => onDownClick(goal.id)} />
       )
     )}
   </FrpTable>
 )
 
 GoalsContainer.propTypes = {
-  order: arrayOf(number).isRequired,
-  goals: objectOf(shape({
+  orderedGoals: arrayOf(shape({
     id: number.isRequired,
     total: number.isRequired,
     deadline: number.isRequired,
@@ -41,7 +39,7 @@ GoalsContainer.propTypes = {
   onDownClick: func.isRequired
 };
 
-const mapStateToProps = (state) => (goalsAndOrderFrom(state))
+const mapStateToProps = (state) => (orderedGoalsFrom(state))
 const mapDispatchToProps = (dispatch) => {
   return {
     onUpClick: (id) => {

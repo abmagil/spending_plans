@@ -1,7 +1,7 @@
 import expect from 'expect';
 
 import { ADD_GOAL, UPDATE_GOAL } from 'src/constants/ActionTypes';
-import goals, { goalsAndOrderFrom } from 'src/reducers/goals';
+import orderedGoals from 'src/reducers/goals';
 
 describe('reducers', () => {
   describe('goals', () => {

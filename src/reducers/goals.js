@@ -26,7 +26,6 @@ export default function goals(state = {}, action) {
   }
 }
 
-export const goalsAndOrderFrom = (state) => ({
-  goals: state.goals,
-  order: state.order
+export const orderedGoalsFrom = (state) => ({
+  orderedGoals: state.order.map((goalId) => (state.goals[goalId]))
 })
