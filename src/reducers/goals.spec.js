@@ -19,8 +19,8 @@ describe('reducers', () => {
       })
     })
 
-    it.skip('should handle UPDATE_GOAL action for a goal', () => {
-      const initialState = { id: 1, type: "Emergency Goal", total: 2000, deadline: 1999, outlay: 0 }
+    it('should handle UPDATE_GOAL action for a goal', () => {
+      const initialState = { id: 1, type: "Emergency Goal", total: 2000, deadline: 2020, outlay: 0 }
 
       expect(initialState, { total: 0 }).toEqual({
         ...initialState,
