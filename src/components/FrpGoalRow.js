@@ -3,8 +3,8 @@ import React from 'react'
 import FrpGoalAttribute from './FrpGoalAttribute';
 import { updateGoal } from '../actions/goal';
 
-const FrpGoalRow = ({ goal, onUpClick, onDownClick }) => {
-  return <tr>
+const FrpGoalRow = ({ goal, onUpClick, onDownClick }) => (
+  <tr>
     <td>
       {goal.type}
     </td>
@@ -35,6 +35,6 @@ const FrpGoalRow = ({ goal, onUpClick, onDownClick }) => {
       </button>
     </td>
   </tr>
-}
+)
 
 export default FrpGoalRow;

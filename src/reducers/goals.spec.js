@@ -1,13 +1,13 @@
 import expect from 'expect';
 
 import { ADD_GOAL, UPDATE_GOAL } from 'src/constants/ActionTypes';
-import goals from 'src/reducers/goals';
+import goals, { goalsAndOrderFrom } from 'src/reducers/goals';
 
 describe('reducers', () => {
   describe('goals', () => {
-    const initialState = {};
 
     it('should include a default state', () => {
+      const initialState = {};
       expect(goals(undefined, {})).toEqual(initialState);
     })
 
@@ -19,8 +19,13 @@ describe('reducers', () => {
       })
     })
 
-    it('should handle UPDATE_GOAL action for a goal', () => {
-      expect(true)
+    it.skip('should handle UPDATE_GOAL action for a goal', () => {
+      const initialState = { id: 1, type: "Emergency Goal", total: 2000, deadline: 1999, outlay: 0 }
+
+      expect(initialState, { total: 0 }).toEqual({
+        ...initialState,
+        total: 0
+      })
     })
   })
-});
+})

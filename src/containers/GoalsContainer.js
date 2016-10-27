@@ -5,6 +5,7 @@ import FrpTable from '../components/FrpTable';
 import FrpGoalRow from '../components/FrpGoalRow';
 
 import { moveUp, moveDown } from '../actions/goals';
+import { goalsAndOrderFrom } from '../reducers/goals';
 
 const {
   arrayOf,
@@ -40,10 +41,7 @@ GoalsContainer.propTypes = {
   onDownClick: func.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  goals: state.goals,
-  order: state.order
-})
+const mapStateToProps = (state) => (goalsAndOrderFrom(state))
 const mapDispatchToProps = (dispatch) => {
   return {
     onUpClick: (id) => {

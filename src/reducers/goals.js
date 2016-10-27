@@ -1,6 +1,6 @@
 import { ADD_GOAL, UPDATE_GOAL } from '../constants/ActionTypes';
 
-function goals(state = {}, action) {
+export default function goals(state = {}, action) {
   // const { goalIndex } = action;
   const goalIndex = 1;
   const goalsCopy = goals;
@@ -30,4 +30,7 @@ function goals(state = {}, action) {
   }
 }
 
-export default goals;
+export const goalsAndOrderFrom = (state) => ({
+  goals: state.goals,
+  order: state.order
+})
