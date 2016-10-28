@@ -1,23 +1,21 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 
-const {
-  Component
-} = React;
-
-const FrpGoalAttribute = ({ attrName, lockedAttr, value, onGoalAttrChange }) => (
-  <td>
-    {lockedAttr === attrName
+const FrpGoalAttribute = ({ isLocked, value, updateHandler }) => {
+  return <td>
+    {isLocked
       ? <p>{value}</p>
-      : <input type="number" value={value} onChange={() => onGoalAttrChange({attrName, value})} />
+      : <input type="number"
+          value={value}
+          onChange={updateHandler} />
     }
   </td>
-)
-
+}
 FrpGoalAttribute.propTypes = {
-  onGoalAttrChange: PropTypes.func.isRequired,
+  goalID: PropTypes.number.isRequired,
+  isLocked: PropTypes.bool.isRequired,
   attrName: PropTypes.string.isRequired,
-  lockedAttr: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
+  updateHandler: PropTypes.func.isRequired
 }
 
 export default FrpGoalAttribute

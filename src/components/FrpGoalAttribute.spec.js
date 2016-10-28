@@ -6,8 +6,9 @@ import expect from 'expect';
 function setup() {
   const props = {
     attrName: 'deadline',
-    lockedAttr: 'deadline',
     value: 2000,
+    isLocked: true,
+    goalID: 1,
     onGoalAttrChange: () => {}
   };
   const wrapper = shallow(<FrpGoalAttribute {...props} />);
@@ -21,6 +22,7 @@ describe('components', () => {
   describe('<FrpGoalAttribute />', () => {
     it('renders a <p> when attribute is locked', () => {
       const { wrapper } = setup();
+      console.log(wrapper.text())
 
       expect(wrapper.find('p').length).toBe(1);
       expect(wrapper.find('p').text()).toBe('2000');
@@ -29,7 +31,7 @@ describe('components', () => {
     it('renders an input when attribute is not locked', () => {
       const { wrapper } = setup();
       wrapper.setProps({
-        lockedAttr: 'other'
+        isLocked: false
       })
 
       expect(wrapper.find('input').length).toBe(1);

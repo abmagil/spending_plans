@@ -1,7 +1,6 @@
 import expect from 'expect';
-
+import goals from './goals';
 import { ADD_GOAL, UPDATE_GOAL } from 'src/constants/ActionTypes';
-import orderedGoals from 'src/reducers/goals';
 
 describe('reducers', () => {
   describe('goals', () => {
@@ -20,11 +19,32 @@ describe('reducers', () => {
     })
 
     it('should handle UPDATE_GOAL action for a goal', () => {
-      const initialState = { id: 1, type: "Emergency Goal", total: 2000, deadline: 2020, outlay: 0 }
+      const initialState = {
+        '3': {
+          id: 3,
+          type: 'Travel Goal',
+          total: 200,
+          deadline: 2022,
+          outlay: 29.88,
+          lockedAttr: 'deadline'
+        }
+      }
 
-      expect(initialState, { total: 0 }).toEqual({
-        ...initialState,
-        total: 0
+      expect(goals(initialState, {
+          type: `${UPDATE_GOAL}`,
+          attrName: 'total',
+          newVal: 14004,
+          goalID: 3
+        })
+      ).toEqual({
+        '3': {
+          id: 3,
+          type: 'Travel Goal',
+          total: 14004,
+          deadline: 2022,
+          outlay: 29.88,
+          lockedAttr: 'deadline'
+        }
       })
     })
   })
