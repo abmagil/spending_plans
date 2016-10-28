@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 // REMOVE THIS BLOCK ONCE ACTIONS ARE WIRED CORRECTLY
 import defaultGoals from '../goals'
 import { addGoal } from './actions/goals'
-import { setAvailableCash } from './actions/available-cash'
+import availableCash from './actions/available-cash'
 // REMOVE THIS BLOCK ONCE ACTIONS ARE WIRED CORRECTLY
 
 import App from './containers/App'
@@ -23,4 +23,4 @@ render(
 defaultGoals.map((goal) => {
   store.dispatch(addGoal(goal))
 })
-store.dispatch(setAvailableCash(400));
+store.dispatch(availableCash(400));
