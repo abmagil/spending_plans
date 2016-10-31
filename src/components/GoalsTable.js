@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { StyleSheet, css } from 'aphrodite/no-important';
-import cdf from '../../cdf';
+import cdf from '../../src/utils/cdf';
 import sum from 'lodash/sum';
 
 const styles = StyleSheet.create({
