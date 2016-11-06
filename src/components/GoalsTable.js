@@ -1,12 +1,23 @@
 import React, { PropTypes } from 'react';
+import { StyleSheet, css } from 'aphrodite/no-important';
 import cdf from '../../cdf';
 import sum from 'lodash/sum';
 
+const styles = StyleSheet.create({
+  table: {
+    borderCollapse: 'separate',
+    borderSpacing: '0'
+  },
+  header: {
+    textAlign: 'center'
+  }
+})
+
 const GoalsTable = ({ children }) => (
-  <table>
-    <thead>
+  <table className={css(styles.table)}>
+    <thead className={css(styles.header)}>
       <tr>
-       <td>Goal</td>
+       <td>Description</td>
        <td>Cost</td>
        <td>Deadline</td>
        <td>Monthly Cost</td>
@@ -31,5 +42,6 @@ const GoalsTable = ({ children }) => (
 GoalsTable.propTypes = {
   children: PropTypes.node
 }
+
 
 export default GoalsTable;
