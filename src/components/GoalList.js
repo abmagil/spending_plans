@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
-
-import GoalsTable from './GoalsTable';
-import Goal from './Goal';
+import GoalRow from './GoalRow';
 
 const {
   arrayOf,
@@ -10,17 +8,17 @@ const {
   shape
  } = PropTypes;
 
-const GoalList = ({ orderedGoals, onUpClick, onDownClick }) => (
-  <GoalsTable>
+const GoalList = ({ orderedGoals }) => (
+  <tbody>
     {orderedGoals.map((goal) => (
-      <Goal
+      <GoalRow
         goal={goal}
         key={goal.id}
         onUpClick={() => onUpClick(goal.id)}
         onDownClick={() => onDownClick(goal.id)} />
       )
     )}
-  </GoalsTable>
+  </tbody>
 )
 
 GoalList.propTypes = {
@@ -29,9 +27,7 @@ GoalList.propTypes = {
     goalTotal: number.isRequired,
     deadlineYear: number.isRequired,
     spendingPerMonth: number.isRequired
-  })).isRequired,
-  onUpClick: func.isRequired,
-  onDownClick: func.isRequired
+  })).isRequired
 };
 
 export default GoalList;

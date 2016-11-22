@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { StyleSheet, css } from 'aphrodite/no-important';
+import GoalList from './GoalList';
 import cdf from '../../src/utils/cdf';
 import sum from 'lodash/sum';
 
@@ -10,11 +11,18 @@ const styles = StyleSheet.create({
   },
   header: {
     textAlign: 'center'
+  },
+  right: {
+    textAlign: 'right'
   }
-})
+});
 
-const GoalsTable = ({ children }) => (
-  <table className={css(styles.table)}>
+const {
+  arrayOf
+} = PropTypes;
+
+const GoalsTable = ({ orderedGoals }) => {
+  return <table className={css(styles.table)}>
     <thead className={css(styles.header)}>
       <tr>
        <td>Description</td>
@@ -24,24 +32,21 @@ const GoalsTable = ({ children }) => (
        <td>Move</td>
      </tr>
     </thead>
-    <tbody>
-      {children}
-    </tbody>
+      <GoalList orderedGoals={orderedGoals} />
     <tfoot>
       <tr>
         <td colSpan="3"></td>
-        <td readOnly>
-          {/*sum(cdf(children.map((g) => g.outlay)))*/}
+        <td readOnly className={css(styles.right)}>
+          {sum(orderedGoals.map((g) => g.spendingPerMonth))}
         </td>
         <td></td>
       </tr>
     </tfoot>
   </table>
-)
-
-GoalsTable.propTypes = {
-  children: PropTypes.node
 }
 
+GoalsTable.propTypes = {
+  orderedGoals: GoalList.propTypes.orderedGoals
+}
 
 export default GoalsTable;

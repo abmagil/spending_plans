@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import GoalList from '../components/GoalList';
+import GoalsTable from '../components/GoalsTable';
 import { moveUp, moveDown } from '../actions/goals';
 import { orderedGoalsFrom } from '../reducers/goals';
 
@@ -17,4 +17,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GoalList)
+export default connect(mapStateToProps, mapDispatchToProps)(GoalsTable)
