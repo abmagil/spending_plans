@@ -1,34 +1,55 @@
-// Calculates distance to the end of given year
-function monthsBetween(deadlineDate, inceptionDate) {
-  let months;
+import moment from 'moment';
 
-  months = (deadlineDate.getFullYear() - inceptionDate.getFullYear()) * 12; // year delta => months
-  months -= inceptionDate.getMonth(); // subtract starting month
-  months += deadlineDate.getMonth(); // add ending month
-  return months <= 1 ? 1 : months; // ensure it returns at least 1 month (even if in past)
+// Calculates distance to the end of given year
+function monthsUntil({deadlineMoment, startingMoment}) {
+  const diff = deadlineMoment.diff(startingMoment, 'months');
+  if (diff >= 0) {
+    return diff;
+  } else {
+    return 1;
+  }
 }
 
-function total({ deadlineDate, monthlyOutlay, startingDate=new Date() }) {
-  if (deadlineDate < startingDate) { return 0 }
+function monthsOfSpending({ goalTotal, spendingPerMonth }) {
+  return Math.ceil(goalTotal / spendingPerMonth);
+}
 
-  const spendingMonths = monthsBetween(deadlineDate, startingDate);
+function total({ spendingPerMonth, deadlineYear, startingYear=moment().year() }) {
+  const deadlineMoment = moment(deadlineYear, 'Y');
+  const startingMoment = moment(startingYear, 'Y');
+  if (deadlineMoment < startingMoment) { return 0 }
 
-  return monthlyOutlay * spendingMonths;
+  const spendingMonths = monthsUntil({deadlineMoment, startingMoment});
+
+  return spendingPerMonth * spendingMonths;
 };
 
-function spendingPerMonth({ goalTotal, deadlineDate, startingDate=new Date() }) {
-  const spendingMonths = monthsBetween(deadlineDate, startingDate);
+function spendingPerMonth({ goalTotal, deadlineYear, startingYear=moment().year() }) {
+  const deadlineMoment = moment(deadlineYear, 'Y');
+  const startingMoment = moment(startingYear, 'Y');
+  const spendingMonths = monthsUntil({deadlineMoment, startingMoment});
 
-  return goalTotal / spendingMonths;
+  if (spendingMonths <= 0) {
+    return goalTotal;
+  } else {
+    return goalTotal / spendingMonths;
+  }
 };
 
 // Built in assumption that answer is "in year XXXX", i.e. by the end of XXXX
-function monthsOfSpending({ goalTotal, monthlyOutlay }) {
-  return Math.ceil(goalTotal / monthlyOutlay); 
+function endYear({ goalTotal, spendingPerMonth, startingYear=moment().year() }) {
+  const startingMoment = moment(startingYear, 'Y');
+  const calculatedMonths = monthsOfSpending({goalTotal, spendingPerMonth});
+
+  if (isFinite(calculatedMonths)) {
+    return moment(startingMoment).add(calculatedMonths, 'M').year();
+  } else {
+    return Infinity;
+  }
 };
 
 export default {
   total,
   spendingPerMonth,
-  monthsOfSpending
+  endYear
 };
