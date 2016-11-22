@@ -31,9 +31,9 @@ const Goal = ({ goal, onUpClick, onDownClick }) => {
     <td className={css(styles.cell, styles.description)}>
       {goal.type}
     </td>
-    <GoalAttrContainer attrName={"total"} goalID={goal.id} />
-    <GoalAttrContainer attrName={"deadline"} goalID={goal.id} />
-    <GoalAttrContainer attrName={"outlay"} goalID={goal.id} />
+    <GoalAttrContainer attrName={"goalTotal"} goalID={goal.id} />
+    <GoalAttrContainer attrName={"deadlineYear"} goalID={goal.id} />
+    <GoalAttrContainer attrName={"spendingPerMonth"} goalID={goal.id} />
     <td className={css(styles.cell)}>
       <button className={css(styles.actionButton)} onClick={onUpClick}>
         Up

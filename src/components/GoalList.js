@@ -26,9 +26,9 @@ const GoalList = ({ orderedGoals, onUpClick, onDownClick }) => (
 GoalList.propTypes = {
   orderedGoals: arrayOf(shape({
     id: number.isRequired,
-    total: number.isRequired,
-    deadline: number.isRequired,
-    outlay: number.isRequired
+    goalTotal: number.isRequired,
+    deadlineYear: number.isRequired,
+    spendingPerMonth: number.isRequired
   })).isRequired,
   onUpClick: func.isRequired,
   onDownClick: func.isRequired
