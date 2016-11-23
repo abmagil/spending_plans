@@ -9,11 +9,11 @@ function setup() {
     value: 2000,
     isLocked: true,
     goalID: 1,
-    onGoalAttrChange: () => {}
+    updateHandler: expect.createSpy()
   };
   const wrapper = shallow(<GoalAttribute {...props} />);
 
-  return { wrapper }
+  return { wrapper, props }
 }
 
 describe('components', () => {
@@ -34,5 +34,12 @@ describe('components', () => {
       expect(wrapper.find('input').length).toBe(1);
       expect(wrapper.find('input').prop('value')).toBe(2000);
     })
+  })
+  it('fires the updateHandler when the input value changes', () => {
+    const { wrapper, props } = setup();
+    wrapper.setProps({ isLocked: false })
+    wrapper.find('input').simulate('change')
+
+    expect(props.updateHandler).toHaveBeenCalled();
   })
 })

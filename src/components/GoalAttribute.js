@@ -38,7 +38,6 @@ const GoalAttribute = ({ isLocked, value, updateHandler }) => {
   </td>
 }
 GoalAttribute.propTypes = {
-  goalID: PropTypes.number.isRequired,
   isLocked: PropTypes.bool.isRequired,
   attrName: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,

@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import GoalRowContainer from '../containers/GoalRowContainer';
 import GoalRow from './GoalRow';
 
 const {
@@ -11,23 +12,16 @@ const {
 const GoalList = ({ orderedGoals }) => (
   <tbody>
     {orderedGoals.map((goal) => (
-      <GoalRow
+      <GoalRowContainer
         goal={goal}
-        key={goal.id}
-        onUpClick={() => onUpClick(goal.id)}
-        onDownClick={() => onDownClick(goal.id)} />
+        key={goal.id} />
       )
     )}
   </tbody>
 )
 
 GoalList.propTypes = {
-  orderedGoals: arrayOf(shape({
-    id: number.isRequired,
-    goalTotal: number.isRequired,
-    deadlineYear: number.isRequired,
-    spendingPerMonth: number.isRequired
-  })).isRequired
+  orderedGoals: arrayOf(GoalRow.propTypes['goal']).isRequired
 };
 
 export default GoalList;

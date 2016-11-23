@@ -6,15 +6,6 @@ import { moveUp, moveDown } from '../actions/goals';
 import { orderedGoalsFrom } from '../reducers/goals';
 
 const mapStateToProps = (state) => (orderedGoalsFrom(state))
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onUpClick: (id) => {
-      dispatch(moveUp(id));
-    },
-    onDownClick: (id) => {
-      dispatch(moveDown(id));
-    }
-  };
-};
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoalsTable)
