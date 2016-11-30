@@ -10,4 +10,4 @@ const availableCash = (state = 0, action) => {
   }
 }
 export default availableCash;
-export const availableCashFrom = (state) => ({availableCash: state.availableCash});
+export const availableCashFrom = (state) => (state.availableCash);

@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import { StyleSheet, css } from 'aphrodite/no-important';
 import GoalList from './GoalList';
-import cdf from '../../src/utils/cdf';
-import sum from 'lodash/sum';
+import cdf from '../utils/cdf';
 
 const styles = StyleSheet.create({
   table: {
@@ -21,28 +20,52 @@ const {
   arrayOf
 } = PropTypes;
 
-const GoalsTable = ({ orderedGoals }) => {
-  return <table className={css(styles.table)}>
-    <thead className={css(styles.header)}>
-      <tr>
-       <td>Description</td>
-       <td>Cost</td>
-       <td>Deadline</td>
-       <td>Monthly Cost</td>
-       <td>Move</td>
-     </tr>
-    </thead>
-      <GoalList orderedGoals={orderedGoals} />
-    <tfoot>
-      <tr>
-        <td colSpan="3"></td>
-        <td readOnly className={css(styles.right)}>
-          {sum(orderedGoals.map((g) => g.spendingPerMonth))}
-        </td>
-        <td></td>
-      </tr>
-    </tfoot>
-  </table>
+const cumulativeGoalSpendingFor = (goals) => (
+  cdf(goals.map((goal) => (goal.spendingPerMonth)))
+)
+
+class GoalsTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cumulativeGoalSpending: 0
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { orderedGoals } = nextProps;
+    this.state = {
+      cumulativeGoalSpending: cumulativeGoalSpendingFor(orderedGoals)
+    };
+  }
+
+  render() {
+    const { orderedGoals } = this.props;
+    const { cumulativeGoalSpending } = this.state;
+    const totalSpending = cumulativeGoalSpending[orderedGoals.length - 1] || 0;
+    
+    return <table className={css(styles.table)}>
+      <thead className={css(styles.header)}>
+        <tr>
+         <td>Description</td>
+         <td>Cost</td>
+         <td>Deadline</td>
+         <td>Monthly Cost</td>
+         <td>Move</td>
+       </tr>
+      </thead>
+        <GoalList orderedGoals={orderedGoals} cumulativeGoalSpending={cumulativeGoalSpending} />
+      <tfoot>
+        <tr>
+          <td colSpan="3"></td>
+          <td readOnly className={`${css(styles.right)} total`}>
+            {totalSpending}
+          </td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  }
 }
 
 GoalsTable.propTypes = {

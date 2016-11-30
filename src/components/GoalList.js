@@ -9,11 +9,12 @@ const {
   shape
  } = PropTypes;
 
-const GoalList = ({ orderedGoals }) => (
+const GoalList = ({ orderedGoals, cumulativeGoalSpending }) => (
   <tbody>
-    {orderedGoals.map((goal) => (
+    {orderedGoals.map((goal, idx) => (
       <GoalRowContainer
         goal={goal}
+        spendingToThisGoal={cumulativeGoalSpending[idx]}
         key={goal.id} />
       )
     )}

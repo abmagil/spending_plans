@@ -5,7 +5,9 @@ import GoalsTable from '../components/GoalsTable';
 import { moveUp, moveDown } from '../actions/goals';
 import { orderedGoalsFrom } from '../reducers/goals';
 
-const mapStateToProps = (state) => (orderedGoalsFrom(state))
+const mapStateToProps = (state) => ({
+  orderedGoals: orderedGoalsFrom(state),
+})
 const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoalsTable)

@@ -10,15 +10,21 @@ const {
 } = PropTypes;
 
 const styles = StyleSheet.create({
-  overspent: {
-    background: '#FFDB6E'
+  veryLow: {
+    background: 'linear-gradient(90deg, #5CD6A2, #BFF4DD)',
+    backgroundAttachment: 'fixed',
   },
-  cell: {
-    height: '1em',
-    lineHeight: '1em'
+  onTrack: {
+    background: 'linear-gradient(90deg, #5CD6A2, #BFF4DD)',
+    backgroundAttachment: 'fixed',
   },
-  description: {
-    paddingRight: '1em'
+  tight: {
+    background: 'linear-gradient(90deg, #F4F463, #BFF4DD)',
+    backgroundAttachment: 'fixed',
+  },
+  over: {
+    background: 'linear-gradient(90deg, #920303, #BFF4DD)',
+    backgroundAttachment: 'fixed',
   },
   actionButton: {
     ':first-of-type': {
@@ -29,11 +35,18 @@ const styles = StyleSheet.create({
     borderRadius: '2px',
     padding: '5px 0',
     width: '5em'
-  }
+  },
+  cell: {
+    height: '1em',
+    lineHeight: '1em'
+  },
+  description: {
+    paddingRight: '1em'
+  },
 })
 
-const GoalRow = ({ goal, onUpClick, onDownClick }) => {
-  return <tr className={css(false && styles.overspent)}>
+const GoalRow = ({ goal, spendingSummary, onUpClick, onDownClick }) => {
+  return <tr className={`${css(styles[spendingSummary])} ${css(styles.row)}`}>
     <td className={css(styles.cell, styles.description)}>
       {goal.type}
     </td>

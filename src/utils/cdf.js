@@ -9,7 +9,7 @@ function isArray(arg) {
 }
 
 export default function cdf(arr) {
-  if (!isArray(arr)) { throw new Error('cdf requires an array of numbers'); }
+  if (!isArray(arr)) { return []; }
 
   const builder = function(acc, n) {
     if (!isNumeric(n)) { throw new Error('cdf requires an array of numbers'); }

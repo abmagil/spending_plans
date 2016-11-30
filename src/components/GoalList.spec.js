@@ -4,9 +4,12 @@ import React from 'react';
 import expect from 'expect';
 
 function setup() {
-  const orderedGoals = [];
+  const props = {
+    orderedGoals: [],
+    cumulativeGoalSpending: []
+  }
   return {
-    wrapper: shallow(<GoalList orderedGoals={orderedGoals} />)
+    wrapper: shallow(<GoalList {...props} />)
   }
 }
 

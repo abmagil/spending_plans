@@ -4,8 +4,11 @@ import React from 'react';
 import expect from 'expect';
 
 function setup() {
-  const orderedGoals= [];
-  const wrapper = shallow(<GoalsTable orderedGoals={orderedGoals} />);
+  const props = {
+    orderedGoals: [],
+    cumulativeGoalSpending: []
+  } 
+  const wrapper = shallow(<GoalsTable {...props} />);
 
   return {
     wrapper
@@ -19,5 +22,18 @@ describe('components', () => {
 
       expect(wrapper.find('table').length).toBe(1);
     });
+    it('should display the total monthly spending on goals', () => {
+      const { wrapper } = setup();
+      expect(wrapper.find('.total').text()).toEqual('0');
+
+      wrapper.setProps({
+        orderedGoals: [
+          {id: 1, goalTotal: 100, deadlineYear: 2059, spendingPerMonth: 40},
+          {id: 1, goalTotal: 100, deadlineYear: 2059, spendingPerMonth: 40},
+          {id: 1, goalTotal: 100, deadlineYear: 2059, spendingPerMonth: 40},
+        ]
+      })
+      expect(wrapper.find('.total').text()).toEqual('120');
+    })
   });
 })

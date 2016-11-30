@@ -20,7 +20,15 @@ describe('CDF function', () => {
     expect(() => cdf([["a"]])).toThrow(/cdf requires an array of numbers/, 'handles arrays of arrays');
   });
 
-  it('errors when passed a non-array argument', () => {
-    expect(() => cdf(true)).toThrow(/cdf requires an array of number/)
+  it('returns an empty array when passed a non-array argument', () => {
+    expect(cdf({})).toEqual([]);
+    expect(cdf(true)).toEqual([]);
+    expect(cdf(false)).toEqual([]);
+    expect(cdf(null)).toEqual([]);
+    expect(cdf(undefined)).toEqual([]);
+  });
+
+  it('returns an empty array when passed an empty array', () => {
+    expect(cdf([])).toEqual([]);
   })
 });

@@ -1,5 +1,6 @@
 import * as actions from '../constants/ActionTypes';
 import calculated from '../utils/attr-relationships';
+import sum from 'lodash/sum';
 
 // Return [0] because .filter returns an array of length 1
 function remainingAttr(lockedAttr, changingAttr) {
@@ -51,6 +52,10 @@ export default function goals(state = {}, action) {
   }
 }
 
-export const orderedGoalsFrom = (state) => ({
-  orderedGoals: state.order.map((goalId) => (state.goals[goalId]))
-})
+export const orderedGoalsFrom = (state) => (
+  state.order.map((goalId) => (state.goals[goalId])) || []
+)
+
+export const totalGoalSpendingFrom = (state) => {
+  return sum(Object.values(state.goals).map((goal) => (goal.spendingPerMonth)));
+}

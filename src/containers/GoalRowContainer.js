@@ -3,10 +3,16 @@ import { connect } from 'react-redux'
 
 import GoalRow from '../components/GoalRow';
 import { moveUp, moveDown } from '../actions/goals';
+import { availableCashFrom } from '../reducers/available-cash';
+import spendingSummary from '../utils/spending-summary';
 
-const mapStateToProps = (state, ownProps) => ({
-  ...ownProps
-})
+const mapStateToProps = (state, ownProps) => {
+  const { goal, spendingToThisGoal } = ownProps;
+  return {
+    goal,
+    spendingSummary: spendingSummary(spendingToThisGoal/ availableCashFrom(state))
+  }
+}
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onUpClick: (id) => {
     dispatch(moveUp(id));
