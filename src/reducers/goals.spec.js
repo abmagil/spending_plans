@@ -8,7 +8,7 @@ describe('reducers', () => {
     it('should include a default state', () => {
       const initialState = {};
       expect(goals(undefined, {})).toEqual(initialState);
-    })
+    });
 
     it(`should handle ${actions.ADD_GOAL} action for a goal`, () => {
       expect(goals({}, {
@@ -16,7 +16,7 @@ describe('reducers', () => {
       })).toEqual({
         "1": { id: 1, type: 'Emergency Goal', total: 100, deadline: 1999, spendingPerMonth: 15}
       })
-    })
+    });
 
     describe(`on an ${actions.UPDATE_GOAL} action`, () => {
       describe('for an outlay-locked goal', () => {
@@ -141,6 +141,28 @@ describe('reducers', () => {
           });
         })
       })
-    })
+    });
+
+    describe(`on an ${actions.UPDATE_LOCKED} action`, () => {
+      it('should set reset the locked attribute for the given goal', () => {
+        const initialState = {
+          '1': {
+            id: 1,
+            lockedAttr: 'spendingPerMonth'
+          }
+        };
+
+        const newState = goals(initialState, {
+          type: actions.UPDATE_LOCKED,
+          goalID: 1,
+          attrName: 'deadlineYear',
+        });
+
+        expect(newState['1']).toEqual({
+          ...initialState['1'],
+          lockedAttr: 'deadlineYear',
+        });
+      })
+    });
   })
 })

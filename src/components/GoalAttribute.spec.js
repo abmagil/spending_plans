@@ -9,6 +9,7 @@ function setup() {
     value: 2000,
     isLocked: true,
     goalID: 1,
+    lockedHandler: expect.createSpy(),
     updateHandler: expect.createSpy()
   };
   const wrapper = shallow(<GoalAttribute {...props} />);
@@ -41,5 +42,12 @@ describe('components', () => {
     wrapper.find('input').simulate('change')
 
     expect(props.updateHandler).toHaveBeenCalled();
-  })
+  });
+  it('fires the lockedHandler when the lock icon is click', () => {
+    const { wrapper, props } = setup();
+    wrapper.setProps({ isLocked: false });
+    wrapper.find('img').simulate('click');
+
+    expect(props.lockedHandler).toHaveBeenCalled();
+  });
 })

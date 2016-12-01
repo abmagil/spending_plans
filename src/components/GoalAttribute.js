@@ -8,12 +8,10 @@ const styles = StyleSheet.create({
     minWidth: '6em',
     textAlign: 'right'
   },
-  contents: {
-    ':before': {
-      content: 'url(unlocked.svg)',
-      height: '0.75em',
-      paddingRight: '0.25em'
-    }
+  lock: {
+    content: 'url(unlocked.svg)',
+    height: '0.75em',
+    paddingRight: '0.25em'
   },
   editable: {
     border: '1px solid transparent',
@@ -24,15 +22,18 @@ const styles = StyleSheet.create({
   }
 })
 
-const GoalAttribute = ({ isLocked, value, updateHandler }) => {
+const GoalAttribute = ({ isLocked, value, lockedHandler, updateHandler }) => {
   return <td className={css(styles.cell)}>
     <div className={!isLocked && css(styles.contents)}>
       {isLocked
         ? <p>{value}</p>
-        : <input className={css(styles.editable)}
+        : <div>
+            <img className={css(styles.lock)} src='unlocked.svg' onClick={lockedHandler} />
+            <input className={css(styles.editable)}
             type="number"
             value={value}
             onChange={updateHandler} />
+          </div>
       }
     </div>
   </td>
@@ -41,6 +42,7 @@ GoalAttribute.propTypes = {
   isLocked: PropTypes.bool.isRequired,
   attrName: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
+  lockedHandler: PropTypes.func.isRequired,
   updateHandler: PropTypes.func.isRequired
 }
 

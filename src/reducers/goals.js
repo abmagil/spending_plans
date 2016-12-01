@@ -32,6 +32,13 @@ const goal = (state = {}, action) => {
   }
 }
 
+const updateLocked = (state = {}, action) => {
+  return {
+    ...state,
+    lockedAttr: action.attrName
+  }
+}
+
 export default function goals(state = {}, action) {
   switch (action.type) {
     case actions.ADD_GOAL:
@@ -47,6 +54,12 @@ export default function goals(state = {}, action) {
         ...state,
        [action.goalID]: goal(updateGoal, action) 
       };
+    case actions.UPDATE_LOCKED:
+      const uGoal = state[action.goalID];
+      return {
+        ...state,
+        [action.goalID]: updateLocked(uGoal, action)
+      }
     default:
       return state;
   }

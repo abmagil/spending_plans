@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux'
 
-import { updateGoal } from '../actions/goal';
+import { updateGoal, updateLocked } from '../actions/goal';
 import GoalAttribute from '../components/GoalAttribute';
 
 const mapStateToProps = (state, ownProps) => {
@@ -28,7 +28,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           attrName
         })
       )
-    }
+    },
+    lockedHandler: () => {
+      dispatch(
+        updateLocked({
+          goalID,
+          attrName
+        })
+      )
+    },
   }
 };
 
