@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { StyleSheet, css } from 'aphrodite/no-important';
-import DebouncedInput from './DebouncedInput';
+import DebouncedComponent from './DebouncedComponent';
 
 const styles = StyleSheet.create({
   cell: {
@@ -23,20 +23,21 @@ const styles = StyleSheet.create({
   }
 })
 
-const GoalAttribute = ({ isLocked, value, lockedHandler, updateHandler }) => {
+const GoalAttribute = ({ attrName, isLocked, value, lockedHandler, updateHandler }) => {
   return <td className={css(styles.cell)}>
     <div className={!isLocked && css(styles.contents)}>
       {isLocked
         ? <p>{value}</p>
         : <div>
             <img className={css(styles.lock)} src='unlocked.svg' onClick={lockedHandler} />
-            <DebouncedInput
-              debouncePeriod={1000}
-              className={css(styles.editable)}
-              type="number"
-              value={value}
-              updateHandler={updateHandler}
-            />
+            <DebouncedComponent debouncePeriod={1000}>
+              <input
+                className={css(styles.editable)}
+                type="number"
+                value={value}
+                onChange={updateHandler}
+              />
+            </DebouncedComponent>
           </div>
       }
     </div>
