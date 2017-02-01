@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { StyleSheet, css } from 'aphrodite/no-important';
 import DebouncedComponent from './DebouncedComponent';
+import NumericInput from './NumericInput';
 
 const styles = StyleSheet.create({
   cell: {
@@ -31,9 +32,8 @@ const GoalAttribute = ({ attrName, isLocked, value, lockedHandler, updateHandler
         : <div>
             <img className={css(styles.lock)} src='unlocked.svg' onClick={lockedHandler} />
             <DebouncedComponent debouncePeriod={1000}>
-              <input
+              <NumericInput
                 className={css(styles.editable)}
-                type="number"
                 value={value}
                 onChange={updateHandler}
               />

@@ -70,7 +70,6 @@ DebouncedComponent.propTypes = {
   debouncePeriod: number,
   children: shape({
     props: shape({
-      type: string.isRequired,
       onChange: func.isRequired,
       onBlur: func,
       value: any.isRequired
